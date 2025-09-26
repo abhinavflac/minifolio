@@ -63,6 +63,19 @@
 
 	.inline-code {
 		@apply px-2 py-1 rounded-lg font-mono text-sm bg-gray-800/50 text-gray-200 border border-gray-700/50;
+		/* Prevent breaking inside inline code blocks */
+		white-space: nowrap;
+		display: inline-block;
+		word-break: keep-all;
+	}
+
+	/* Responsive behavior for very small screens */
+	@media (max-width: 480px) {
+		.inline-code {
+			white-space: normal;
+			word-break: break-word;
+			display: inline;
+		}
 	}
 
 	/* Glassmorphism code blocks */
