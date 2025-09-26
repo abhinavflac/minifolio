@@ -63,6 +63,9 @@
 
 	.inline-code {
 		@apply px-2 py-1 rounded-lg font-mono text-sm bg-gray-800/50 text-gray-200 border border-gray-700/50;
+		/* Make inline code blocks wrap as complete units */
+		display: inline-block;
+		white-space: nowrap;
 	}
 
 	/* Glassmorphism code blocks */
