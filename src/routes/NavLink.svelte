@@ -19,10 +19,15 @@
 		text-decoration: none;
 		width: fit-content;
 		font-style: italic;
-		will-change: transform;
+		will-change: transform, color;
 		transform-origin: left;
 		text-transform: lowercase;
-		transition: all 0.3s ease;
+		transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+		            color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		perspective: 1000px;
+		-webkit-perspective: 1000px;
 	}
 
 	.nav-link:hover {
@@ -34,14 +39,44 @@
 		position: absolute;
 		content: "";
 		bottom: -2.25px;
-		width: 40%;
+		left: 0;
+		width: 100%;
 		height: 2.25px;
 		background-color: hsl(var(--primary-300));
-		transition: width 0.3s ease;
+		transform: scaleX(0.4);
+		transform-origin: left;
+		transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		will-change: transform;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 
 	.nav-link:hover::after,
 	.nav-link.active::after {
-		width: 100%;
+		transform: scaleX(1);
+	}
+
+	/* Mobile optimizations for touch devices */
+	@media (hover: none) and (pointer: coarse) {
+		.nav-link {
+			transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+			            color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+		
+		.nav-link::after {
+			transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+	}
+
+	/* High refresh rate displays (120Hz+) */
+	@media (min-resolution: 120dpi) {
+		.nav-link {
+			transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+			            color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+		
+		.nav-link::after {
+			transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
 	}
 </style>
