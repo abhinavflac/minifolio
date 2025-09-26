@@ -2,9 +2,13 @@
 	import '../app.postcss';
 
 	import { onNavigate } from '$app/navigation';
+	import { onMount } from 'svelte';
 
 	import NavLink from './NavLink.svelte';
 	import BackgroundEffect from './BackgroundEffect.svelte';
+	import Cursor from '$lib/components/Cursor.svelte';
+	import { initCopyButtons } from '$lib/copy-button.js';
+	import { initAnchorLinks } from '$lib/anchor-links.js';
 
 	function getBaseRoute(pathname: string | undefined) {
 		return pathname?.match(/\/[^/]*/)?.[0] ?? '/';
@@ -31,12 +35,19 @@
 			});
 		});
 	});
+
+	// Initialize copy buttons and anchor links when component mounts
+	onMount(() => {
+		initCopyButtons();
+		initAnchorLinks();
+	});
 </script>
 
 <BackgroundEffect />
+<Cursor />
 
 <nav class="wrapper mt-20 md:mt-32 text-gray-400">
-	<ul class="flex flex-wrap gap-x-12 gap-y-2">
+	<ul class="flex flex-wrap gap-x-6 gap-y-2">
 		<NavLink href="/">Home</NavLink>
 		<NavLink href="/projects">Projects</NavLink>
 		<NavLink href="/music">Music</NavLink>

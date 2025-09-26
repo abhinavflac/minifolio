@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { readable } from 'svelte/store';
+import { readable, writable } from 'svelte/store';
 
 export const now = readable(new Date(), set => {
 	const interval = setInterval(() => {
@@ -19,3 +19,6 @@ export const fastNow = readable(new Date(), set => {
 
 	return () => cancelAnimationFrame(id);
 });
+
+// Timezone store with default as Kolkata
+export const timezone = writable('Asia/Kolkata');

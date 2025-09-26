@@ -2,8 +2,7 @@ module.exports = {
 	root: true,
 	extends: [
 		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:svelte/recommended',
+		'@typescript-eslint/recommended',
 		'prettier'
 	],
 	parser: '@typescript-eslint/parser',
@@ -24,7 +23,17 @@ module.exports = {
 			parser: 'svelte-eslint-parser',
 			parserOptions: {
 				parser: '@typescript-eslint/parser'
+			},
+			extends: ['plugin:svelte/recommended'],
+			rules: {
+				'@typescript-eslint/no-unused-vars': 'off'
 			}
 		}
-	]
+	],
+	rules: {
+		'@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+		'@typescript-eslint/no-explicit-any': 'warn',
+		'prefer-const': 'error',
+		'no-var': 'error'
+	}
 };

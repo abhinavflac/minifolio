@@ -37,7 +37,7 @@
 		: 0;
 </script>
 
-<div class="mt-4 flex rounded-full items-center bg-gray-900">
+<div class="mt-4 flex rounded-full items-center spotify-card">
 	{#if data?.track?.album.images[0]?.url}
 		<object
 			data={data.track.album.images[0].url}
@@ -143,6 +143,31 @@
 </div>
 
 <style lang="postcss">
+	.spotify-card {
+		/* Glassmorphism background effects */
+		background: rgba(255, 255, 255, 0.025);
+		backdrop-filter: blur(5px);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		
+		/* Shadow effects */
+		box-shadow:
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06),
+			inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+		
+		transition: all 0.3s ease;
+	}
+	
+	.spotify-card:hover {
+		/* Hover state enhancements */
+		background: rgba(255, 255, 255, 0.04);
+		border-color: rgba(255, 255, 255, 0.1);
+		box-shadow:
+			0 8px 12px -1px rgba(0, 0, 0, 0.15),
+			0 4px 8px -1px rgba(0, 0, 0, 0.1),
+			inset 0 1px 0 0 rgba(255, 255, 255, 0.075);
+	}
+
 	.progress {
 		background: conic-gradient(
 			theme('colors.gray.700') calc(var(--progress) * 100%),

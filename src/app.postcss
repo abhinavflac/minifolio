@@ -4,6 +4,18 @@
 @import 'tailwindcss/utilities';
 
 @layer base {
+	:root {
+		--primary-100: 0 0% 96%;
+		--primary-200: 0 0% 90%;
+		--primary-300: 0 0% 83%;
+		--primary-400: 0 0% 64%;
+		--primary-500: 0 0% 45%;
+		--primary-600: 0 0% 32%;
+		--primary-700: 0 0% 19%;
+		--primary-800: 0 0% 15%;
+		--primary-900: 0 0% 9%;
+	}
+
 	html {
 		@apply bg-gray-950 text-white;
 
@@ -47,6 +59,282 @@
 @layer components {
 	.wrapper {
 		@apply mx-auto max-w-screen-md px-8;
+	}
+
+	.inline-code {
+		@apply px-2 py-1 rounded-lg font-mono text-sm bg-gray-800/50 text-gray-200 border border-gray-700/50;
+	}
+
+	/* Glassmorphism code blocks */
+	.prose pre {
+		@apply overflow-hidden p-0 m-6 relative;
+		border-radius: 1.5rem;
+		backdrop-filter: blur(5px);
+		background: 0;
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		box-shadow: 
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06),
+			inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+	}
+
+	/* Copy button container */
+	.prose pre .copy-btn {
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+		transform: translateY(-50%);
+		width: 2rem;
+		height: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.875rem;
+		background: transparent;
+		backdrop-filter: blur(5px);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 1rem;
+		cursor: pointer;
+		opacity: 1;
+		transition: all 0.2s ease;
+		z-index: 10;
+		color: white;
+		box-shadow: 
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06),
+			inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+	}
+
+	.prose pre .copy-btn:hover {
+		background: rgba(255, 255, 255, 0.1);
+		transform: translateY(-50%) scale(1.05);
+	}
+
+	.prose pre .copy-btn.copied {
+		background: rgba(34, 197, 94, 0.2);
+		border-color: rgba(34, 197, 94, 0.4);
+	}
+
+	.prose pre code {
+		@apply block text-sm bg-transparent;
+		color: #e5e7eb;
+		font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+		line-height: 1.4;
+		padding: 1rem 1.5rem;
+		overflow-x: auto;
+		white-space: pre;
+		box-sizing: border-box;
+		mask-image: linear-gradient(to right, black 70%, transparent 95%);
+		-webkit-mask-image: linear-gradient(to right, black 70%, transparent 95%);
+	}
+
+	.prose code {
+		@apply text-gray-200;
+	}
+
+	/* GitHub-style anchor links for headings */
+	.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+		position: relative;
+		scroll-margin-top: 2rem;
+		transition: all 0.2s ease;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	
+	.prose h1:hover,
+	.prose h2:hover,
+	.prose h3:hover,
+	.prose h4:hover,
+	.prose h5:hover,
+	.prose h6:hover {
+		/* Removed underline effect */
+	}
+	
+	.anchor-link {
+		opacity: 0;
+		transition: all 0.2s ease;
+		color: rgba(156, 163, 175, 0.6);
+		text-decoration: none;
+		font-size: 1rem;
+		font-weight: normal;
+		width: 1.25rem;
+		height: 1.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		flex-shrink: 0;
+		border-radius: 0.25rem;
+		padding: 0.25rem;
+		margin-left: 0.5rem;
+		background: rgba(255, 255, 255, 0.025);
+		backdrop-filter: blur(2.5px);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+	}
+	
+	/* Show anchor links on hover for desktop */
+	@media (hover: hover) and (pointer: fine) {
+		.prose h1:hover .anchor-link,
+		.prose h2:hover .anchor-link,
+		.prose h3:hover .anchor-link,
+		.prose h4:hover .anchor-link,
+		.prose h5:hover .anchor-link,
+		.prose h6:hover .anchor-link {
+			opacity: 1;
+		}
+	}
+	
+	/* Always show anchor links on touch devices */
+	@media (hover: none) and (pointer: coarse) {
+		.anchor-link {
+			opacity: 0.7;
+		}
+		
+		.prose h1:active .anchor-link,
+		.prose h2:active .anchor-link,
+		.prose h3:active .anchor-link,
+		.prose h4:active .anchor-link,
+		.prose h5:active .anchor-link,
+		.prose h6:active .anchor-link {
+			opacity: 1;
+			background: rgba(255, 255, 255, 0.05);
+		}
+	}
+	
+	.anchor-link svg {
+		width: 1em;
+		height: 1em;
+		stroke: currentColor;
+		fill: none;
+		stroke-width: 1.5;
+		transition: stroke 0.2s ease;
+	}
+	
+	.anchor-link:hover svg,
+	.anchor-link:focus svg {
+		stroke: rgba(147, 51, 234, 0.9);
+	}
+	
+	.anchor-link:hover,
+	.anchor-link:focus {
+		background: rgba(255, 255, 255, 0.05);
+		border-color: rgba(255, 255, 255, 0.1);
+		transform: scale(1.05);
+	}
+	
+	/* Focus styles for accessibility */
+	.anchor-link:focus {
+		outline: 2px solid rgba(147, 51, 234, 0.5);
+		outline-offset: 2px;
+		opacity: 1;
+	}
+
+	/* Accent color for links in prose content */
+	.prose a {
+		color: rgba(147, 51, 234, 0.8);
+		text-decoration: none;
+		border-bottom: 1px solid rgba(147, 51, 234, 0.3);
+		transition: all 0.2s ease;
+	}
+	
+	.prose a:hover {
+		color: rgba(147, 51, 234, 1);
+		border-bottom-color: rgba(147, 51, 234, 0.6);
+		text-shadow: 0 0 8px rgba(147, 51, 234, 0.4);
+	}
+
+	/* Glassmorphism technologies styling */
+	.glassmorphism-tech {
+		background: rgba(255, 255, 255, 0.025);
+		backdrop-filter: blur(5px);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		box-shadow:
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06),
+			inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+		transition: all 0.2s ease;
+	}
+	
+	.glassmorphism-tech:hover {
+		background: rgba(255, 255, 255, 0.05);
+		border-color: rgba(255, 255, 255, 0.1);
+		transform: translateY(-1px);
+		box-shadow:
+			0 6px 8px -1px rgba(0, 0, 0, 0.15),
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			inset 0 1px 0 0 rgba(255, 255, 255, 0.075);
+	}
+
+	/* Multi-level bullet styling */
+	.prose ul {
+		list-style: none;
+		padding-left: 0;
+	}
+	
+	.prose ul > li {
+		position: relative;
+		padding-left: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+	
+	/* Level 1 bullets - solid circles with accent color */
+	.prose ul > li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.5rem;
+		width: 0.5rem;
+		height: 0.5rem;
+		background: rgba(147, 51, 234, 0.8);
+		border-radius: 50%;
+	}
+	
+	/* Level 2 bullets - hollow circles */
+	.prose ul ul > li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.5rem;
+		width: 0.4rem;
+		height: 0.4rem;
+		background: transparent;
+		border: 2px solid rgba(147, 51, 234, 0.6);
+		border-radius: 50%;
+	}
+	
+	/* Level 3 bullets - smaller hollow circles */
+	.prose ul ul ul > li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.5rem;
+		width: 0.3rem;
+		height: 0.3rem;
+		background: transparent;
+		border: 1.5px solid rgba(255, 255, 255, 0.4);
+		border-radius: 50%;
+	}
+	
+	/* Nested list indentation */
+	.prose ul ul {
+		margin-top: 0.25rem;
+		margin-bottom: 0.25rem;
+		padding-left: 1rem;
+	}
+	
+	.prose ul ul ul {
+		padding-left: 0.75rem;
+	}
+
+	/* Default images in prose content (fallback) */
+	.prose img:not(.expandable-image) {
+		border-radius: 1.5rem;
+		margin: 1.5rem 0;
+		box-shadow:
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.1);
 	}
 
 	.header {
@@ -101,5 +389,50 @@
 	}
 	.no-scrollbar::-webkit-scrollbar {
 		display: none;
+	}
+	
+	/* Glassmorphism effects */
+	.glassmorphism {
+		background: rgba(17, 24, 39, 0.3);
+		backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		box-shadow: 
+			0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06),
+			inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+	}
+	
+	/* Enhanced prose styling */
+	.prose {
+		@apply text-gray-300 leading-relaxed;
+	}
+	
+	.prose h1 {
+		@apply text-3xl mb-6 text-white font-bold mt-8;
+	}
+	
+	.prose h2 {
+		@apply text-2xl text-white font-bold mt-8 mb-4;
+	}
+	
+	.prose h3 {
+		@apply text-xl text-white font-bold mt-8 mb-4;
+	}
+	
+	.prose h4, .prose h5, .prose h6 {
+		@apply text-white font-bold mt-8 mb-4;
+	}
+	
+	.prose p {
+		@apply mb-4;
+	}
+	
+	.prose ol {
+		@apply mb-4 pl-6;
+		list-style: decimal;
+	}
+	
+	.prose blockquote {
+		@apply border-l-4 border-blue-500 pl-4 italic text-gray-400 my-4;
 	}
 }
