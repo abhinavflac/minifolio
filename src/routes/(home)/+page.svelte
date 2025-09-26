@@ -9,7 +9,6 @@
 	import GitHub from '$lib/components/icons/GitHub.svelte';
 	import Envelope from '$lib/components/icons/Envelope.svelte';
 	import Linkedin from '$lib/components/icons/Linkedin.svelte';
-	import Spotify from '$lib/components/icons/Spotify.svelte';
 	import Twitter from '$lib/components/icons/Twitter.svelte';
 	import Meta from '$lib/components/Meta.svelte';
 
@@ -48,9 +47,9 @@
 	<p class="mt-4 text-gray-400">
 		I'm Abhinav, an AI &amp; Data Science Specialist
 		passionate about building scalable, AI-driven solutions. With expertise in 
-		<code class="inline-code">Data Analytics</code>, 
-		<code class="inline-code">Data Science</code>, and 
-		<code class="inline-code">Machine Learning</code>, 
+		<code class="inline-code">Data Analytics,</code> 
+		<code class="inline-code">Data Science,</code> and 
+		<code class="inline-code">Machine Learning,</code> 
 		I create impactful user experiences and explore innovative projects in my free time.
 	</p>
 
