@@ -3,10 +3,14 @@
 
 	import { onNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 
 	import NavLink from './NavLink.svelte';
 	import BackgroundEffect from './BackgroundEffect.svelte';
 	import Cursor from '$lib/components/Cursor.svelte';
+	import LoadingScreen from '$lib/components/LoadingScreen.svelte';
+	import { appPreloader } from '$lib/preloader';
+	import { registerServiceWorker } from '$lib/service-worker';
 	import { initCopyButtons } from '$lib/copy-button.js';
 	import { initAnchorLinks } from '$lib/anchor-links.js';
 
@@ -36,12 +40,49 @@
 		});
 	});
 
+	// Loading screen state
+	let showLoadingScreen = true;
+	let loadingProgress = 0;
+	let loadingMessage = 'Initializing...';
+
 	// Initialize copy buttons and anchor links when component mounts
 	onMount(() => {
 		initCopyButtons();
 		initAnchorLinks();
+		
+		// Register Service Worker
+		if (browser) {
+			registerServiceWorker();
+		}
+		
+		// Subscribe to preloader progress
+		if (browser) {
+			const unsubscribe = appPreloader.subscribe(({ progress, message }) => {
+				loadingProgress = progress;
+				loadingMessage = message;
+				
+				// Hide loading screen when complete
+				if (progress >= 100) {
+					setTimeout(() => {
+						showLoadingScreen = false;
+					}, 1000);
+				}
+			});
+			
+			// Cleanup subscription on component destroy
+			return unsubscribe;
+		}
+		
+		return undefined;
 	});
 </script>
+
+<!-- Loading Screen -->
+<LoadingScreen 
+	bind:show={showLoadingScreen}
+	progress={loadingProgress}
+	message={loadingMessage}
+/>
 
 <BackgroundEffect />
 <Cursor />

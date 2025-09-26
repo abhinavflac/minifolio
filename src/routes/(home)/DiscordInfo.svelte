@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { useLanyard } from 'sk-lanyard';
 	import { onMount, onDestroy } from 'svelte';
+	import { appPreloader } from '$lib/preloader';
 
 	import Discord from '$lib/components/icons/Discord.svelte';
 
@@ -18,7 +19,7 @@
 	};
 
 	$: customStatus = $lanyard?.activities.find(a => a.type === 4);
-	$: location = $lanyard?.kv?.location ? JSON.parse($lanyard.kv.location) : null;
+	// $: location = $lanyard?.kv?.location ? JSON.parse($lanyard.kv.location) : null;
 	$: activeClients = $lanyard ? [
 		$lanyard.active_on_discord_desktop && 'Desktop',
 		$lanyard.active_on_discord_mobile && 'Mobile'
@@ -41,6 +42,14 @@
 	let timeInterval: ReturnType<typeof setInterval>;
 
 	onMount(() => {
+		// Check if Discord data was preloaded
+		const preloadedDiscord = appPreloader.getPreloadedData('discord');
+		if (preloadedDiscord) {
+			console.log('🚀 Using preloaded Discord data:', preloadedDiscord);
+			// Note: sk-lanyard manages its own state, so we can't directly inject data
+			// But we can use the preloaded data for fallback or display
+		}
+		
 		timeInterval = setInterval(() => {
 			currentTime = Date.now();
 		}, 1000);

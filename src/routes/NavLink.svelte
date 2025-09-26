@@ -1,13 +1,26 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { browser } from '$app/environment';
+	import { appPreloader } from '$lib/preloader';
 
 	export let href: string;
 
 	$: active = href === $page.url.pathname;
+
+	// Prefetch route on hover (only in browser)
+	function handleMouseEnter() {
+		if (browser) {
+			appPreloader.prefetchRoute(href);
+		}
+	}
 </script>
 
 <li>
-	<a {href} class="nav-link {active ? 'text-white active' : 'text-primary-300'}">
+	<a 
+		{href} 
+		class="nav-link {active ? 'text-white active' : 'text-primary-300'}"
+		on:mouseenter={handleMouseEnter}
+	>
 		<slot />
 	</a>
 </li>
