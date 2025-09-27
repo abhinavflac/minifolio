@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import type { WeatherResponse } from '$lib/types';
-	import { appPreloader } from '$lib/preloader';
 
 	import Cloud from '$lib/components/icons/Cloud.svelte';
 
@@ -61,14 +60,11 @@
 	}
 
 	onMount(() => {
-		// Check if weather data was preloaded
-		const preloadedWeather = appPreloader.getPreloadedData('weather');
-		if (preloadedWeather) {
-			console.log('🚀 Using preloaded weather data:', preloadedWeather);
-			data = preloadedWeather;
-		} else {
-			// Fallback to normal loading
+		// Only run in browser
+		if (browser) {
+			// First detect user's location in background
 			detectUserLocation();
+			// Then fetch weather for default location (Shimla)
 			fetchWeatherForCurrentLocation();
 		}
 	});
@@ -99,8 +95,8 @@
 			Loading weather...
 		{:else if data}
 			It's
-			<b>{data.main?.temp?.toFixed(0)} °C</b> with
-			{names[data.weather?.[0]?.description || ''] ?? data.weather?.[0]?.description}
+			<b>{data.main.temp.toFixed(0)} °C</b> with
+			{names[data.weather[0].description] ?? data.weather[0].description}
 			in
 			<b>{data.name}</b>
 		{:else}

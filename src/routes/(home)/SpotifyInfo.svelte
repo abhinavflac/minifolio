@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import type { NowPlayingResponse } from '$lib/types';
 	import { fastNow } from '$lib/stores';
-	import { appPreloader } from '$lib/preloader';
 
 	import MusicalNote from '$lib/components/icons/MusicalNote.svelte';
 	import Pause from '$lib/components/icons/Pause.svelte';
@@ -12,18 +11,7 @@
 	let lastFetched = 0;
 
 	onMount(() => {
-		// Check if Spotify data was preloaded
-		const preloadedSpotify = appPreloader.getPreloadedData('spotify');
-		if (preloadedSpotify) {
-			console.log('🚀 Using preloaded Spotify data:', preloadedSpotify);
-			data = preloadedSpotify;
-			lastFetched = Date.now();
-		} else {
-			// Fallback to normal loading
-			fetchNowPlaying();
-		}
-		
-		// Set up interval for updates
+		fetchNowPlaying();
 		const id = setInterval(() => fetchNowPlaying(), 5000);
 		return () => clearInterval(id);
 	});
