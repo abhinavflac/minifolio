@@ -54,18 +54,18 @@
 	</p>
 
 	<div class="mt-4 flex gap-6">
-		<SocialLink href="https://github.com/GithubMaster-IN" name="GitHub">
+		<SocialLink href="https://github.com/abhinavflac" name="GitHub">
 			<GitHub />
 		</SocialLink>
 
 		<SocialLink
-			href="https://www.linkedin.com/in/GithubMaster"
+			href="https://www.linkedin.com/in/abhiavflac"
 			name="LinkedIn"
 		>
 			<Linkedin />
 		</SocialLink>
 
-		<SocialLink href="https://twitter.com/GithubMasterIN" name="Twitter">
+		<SocialLink href="https://twitter.com/abhinav.flac" name="Twitter">
 			<Twitter />
 		</SocialLink>
 
@@ -76,7 +76,7 @@
 			<Spotify />
 		</SocialLink> -->
 
-		<SocialLink href="mailto:githubmasterin@gmail.com" name="Email">
+		<SocialLink href="mailto:abhinavflac@gmail.com" name="Email">
 			<Envelope />
 		</SocialLink>
 	</div>

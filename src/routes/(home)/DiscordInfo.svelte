@@ -69,7 +69,7 @@
 	}
 
 	function openDiscordProfile() {
-		window.open(`https://discord.com/users/${discordId}`, '_blank');
+		window.open(`https://discord.com/users/1107241247086739537`, '_blank');
 	}
 </script>
 
