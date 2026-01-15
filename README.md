@@ -167,7 +167,7 @@ Before setting up the project, ensure you have the following installed:
 
 ```bash
 # Clone the repository
-git clone https://github.com/GithubMaster-IN/minifolio.git
+git clone https://github.com/abhinavflac/minifolio.git
 
 # Navigate to project directory
 cd minifolio
@@ -683,10 +683,10 @@ npm run build
 
 ### Contact Information
 **Abhinav** - AI & Data Science Specialist  
-📧 Email: [githubmasterin@gmail.com](mailto:githubmasterin@gmail.com)  
-🐙 GitHub: [@GithubMaster-IN](https://github.com/GithubMaster-IN)  
-💼 LinkedIn: [@GithubMaster](https://www.linkedin.com/in/GithubMaster)  
-🐦 Twitter: [@GithubMasterIN](https://twitter.com/GithubMasterIN)
+📧 Email: [abhinavflac@gmail.com](mailto:abhinavflac@gmail.com)  
+🐙 GitHub: [@abhinavflac](https://github.com/abhinavflac)  
+💼 LinkedIn: [@abhinavflac](https://www.linkedin.com/in/abhinavflac)  
+🐦 Twitter: [@abhinavflac](https://twitter.com/abhinavflac)
 
 ---
 
